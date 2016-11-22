@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>19951505478-kb99pkebvmb4ct77315rs0tobsjkh6pc.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.19951505478-kb99pkebvmb4ct77315rs0tobsjkh6pc</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDWMrWj6f3bXakWvCXjgcBRt0V_0ufjAFA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>19951505478</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>br.ufpe.cin.bepid.Carol.MoveSec2</string>
+	<key>PROJECT_ID</key>
+	<string>movesec2-83125</string>
+	<key>STORAGE_BUCKET</key>
+	<string>movesec2-83125.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:19951505478:ios:2d41c0b75a7a0f2b</string>
+	<key>DATABASE_URL</key>
+	<string>https://movesec2-83125.firebaseio.com</string>
+</dict>
+</plist>
