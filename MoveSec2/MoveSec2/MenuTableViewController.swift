@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class MenuTableViewController: UITableViewController {
 
@@ -20,13 +21,25 @@ class MenuTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Sair", style: .plain, target: self, action: #selector(handleLogOut))
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    func handleLogOut() {
+        do{
+            try FIRAuth.auth()?.signOut()
+            print("Logout Efetuado!")
+            performSegue(withIdentifier: "VaiLogout", sender: self)
+        } catch let logoutError{
+            print(logoutError)
+        }
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
