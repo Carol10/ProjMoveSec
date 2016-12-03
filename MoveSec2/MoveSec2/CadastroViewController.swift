@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
-class CadastroViewController: UIViewController {
+class CadastroViewController: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var senhaField: UITextField!
     @IBOutlet weak var nomeField: UITextField!
@@ -23,8 +23,13 @@ class CadastroViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         emailField.placeholder = "exemplo@email.com"
+        senhaField.placeholder = "pelo menos 6 dígitos."
         nomeField.placeholder = "Ex: Lucas"
         senhaField.isSecureTextEntry = true
+        
+        senhaField.delegate = self
+        emailField.delegate = self
+        nomeField.delegate = self
         
         
     }
@@ -34,7 +39,8 @@ class CadastroViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func cadastrarAct(_ sender: Any) {
-        guard let emailc = emailField.text, let senhac = senhaField.text else {
+        guard let emailc = emailField.text, let senhac = senhaField.text, let nomec = nomeField.text else
+        {
             print("valores inválidos!")
             return
         }
@@ -43,16 +49,44 @@ class CadastroViewController: UIViewController {
             if error != nil {
                 print("Cadastro Não Efetuado!")
                 return
-            }else{
-                print("Cadastro Efetuado!")
-                self.performSegue(withIdentifier: "VaiInicio", sender: self)
+            }
+            
+            //cadastro efetuado com sucesso!
+            guard let uid = user?.uid else{
                 return
             }
+            
+            let ref = FIRDatabase.database().reference(fromURL: "https://movesec2-83125.firebaseio.com/")
+            let usersReference = ref.child("Users").child(uid)
+            
+            let values = ["nome": nomec, "email": emailc, "NLD" : "Sem dispositivos", "codD" : "0", "dataUI" : "Sem data", "Ninvasoes" : "0"]
+            
+            usersReference.updateChildValues(values, withCompletionBlock: {
+                (err,ref) in
+                
+                if err != nil{
+                    print("erro no Database")
+                    return
+                }
+                print("usuario salvo no database!")
+            
+            })
+            
+            print("Cadastro Efetuado!")
+            self.performSegue(withIdentifier: "VaiInicio", sender: self)
+            
         })
         
     }
     @IBAction func sairAct(_ sender: Any) {
         performSegue(withIdentifier: "VaiInicio", sender: self)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.senhaField.resignFirstResponder()
+        self.emailField.resignFirstResponder()
+        self.nomeField.resignFirstResponder()
+        return true;
     }
     
 

@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var senhaField: UITextField!
     @IBOutlet weak var entrar: UIButton!
@@ -25,6 +25,9 @@ class ViewController: UIViewController {
         
         emailField.placeholder = "exemplo@email.com"
         senhaField.isSecureTextEntry = true
+        
+        emailField.delegate = self
+        senhaField.delegate = self
         
     }
 
@@ -54,6 +57,12 @@ class ViewController: UIViewController {
 
     @IBAction func cadastrarAct(_ sender: Any) {
         performSegue(withIdentifier: "VaiCadastro", sender: self)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.emailField.resignFirstResponder()
+        self.senhaField.resignFirstResponder()
+        return true
     }
 
 }

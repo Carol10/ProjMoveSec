@@ -8,9 +8,10 @@
 
 import UIKit
 import Firebase
+import FirebaseMessaging
+import UserNotifications
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+@UIApplicationMain class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
@@ -19,6 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         FIRApp.configure()
+        
+        let notType: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.badge, UIUserNotificationType.sound]
+        let notSettings = UIUserNotificationSettings(types: notType, categories: nil)
+        
+        application.registerForRemoteNotifications()
+        application.registerUserNotificationSettings(notSettings)
+        
         
         return true
     }
@@ -44,7 +52,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
+    //para notificações
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        print("MessageID: \(userInfo["gcm_message_id"]!)")
+        
+        print(userInfo)
+    }
+    
 }
 
