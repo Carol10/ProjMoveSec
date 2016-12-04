@@ -26,6 +26,9 @@ class MenuTableViewController: UITableViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Sair", style: .plain, target: self, action: #selector(handleLogOut))
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
         
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "User", style: .plain, target: self, action: #selector(irStatus))
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        
         checkUser()
     }
 
@@ -62,6 +65,10 @@ class MenuTableViewController: UITableViewController {
         } catch let logoutError{
             print(logoutError)
         }
+    }
+    
+    func irStatus() {
+        performSegue(withIdentifier: "VaiStatus", sender: self)
     }
     // MARK: - Table view data source
 

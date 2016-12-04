@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E1514991DF3E9160053BF44 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1514981DF3E9160053BF44 /* StatusViewController.swift */; };
 		7EA5EEE81DE14DAF0047503C /* CadastroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA5EEE71DE14DAF0047503C /* CadastroViewController.swift */; };
 		7EA5EEEA1DE155CA0047503C /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA5EEE91DE155CA0047503C /* MenuTableViewController.swift */; };
 		7EA5EEEC1DE156200047503C /* DispTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA5EEEB1DE156200047503C /* DispTableViewCell.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E1514981DF3E9160053BF44 /* StatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		7E8A18661DE3DCD4009598AD /* MoveSec2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MoveSec2.entitlements; sourceTree = "<group>"; };
 		7EA5EEE71DE14DAF0047503C /* CadastroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CadastroViewController.swift; sourceTree = "<group>"; };
 		7EA5EEE91DE155CA0047503C /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				7EA5EEE91DE155CA0047503C /* MenuTableViewController.swift */,
 				7EA5EEEB1DE156200047503C /* DispTableViewCell.swift */,
 				7EA5EEED1DE171960047503C /* AddDispViewController.swift */,
+				7E1514981DF3E9160053BF44 /* StatusViewController.swift */,
 				7EF18F3B1DE13CA2005D67AF /* Main.storyboard */,
 				7EF18F3E1DE13CA2005D67AF /* Assets.xcassets */,
 				7EF18F401DE13CA2005D67AF /* LaunchScreen.storyboard */,
@@ -368,6 +371,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E1514991DF3E9160053BF44 /* StatusViewController.swift in Sources */,
 				7EA5EEEA1DE155CA0047503C /* MenuTableViewController.swift in Sources */,
 				7EF18F3A1DE13CA2005D67AF /* ViewController.swift in Sources */,
 				7EA5EEEE1DE171960047503C /* AddDispViewController.swift in Sources */,
