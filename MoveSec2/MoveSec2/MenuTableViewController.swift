@@ -11,7 +11,8 @@ import Firebase
 
 class MenuTableViewController: UITableViewController {
 
-    var com = ["Sala de Estar","Suíte"]
+    var como = " "
+    var connect = "Desconectado"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,12 +26,34 @@ class MenuTableViewController: UITableViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Sair", style: .plain, target: self, action: #selector(handleLogOut))
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
         
+        checkUser()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func checkUser() {
+        if FIRAuth.auth()?.currentUser?.uid == nil {
+            perform(#selector(handleLogOut), with: nil, afterDelay: 0)
+        }else{
+            let uid = FIRAuth.auth()?.currentUser?.uid
+            FIRDatabase.database().reference().child("Users").child(uid!).observe(.value, with: { (snapshot) in
+                
+                if let dictionary = snapshot.value as? [String:Any]{
+                    self.como = (dictionary["NLD"] as? String)!
+                    self.connect = (dictionary["conexao"] as? String)!
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
+            
+            })
+        }
+    }
+    
     func handleLogOut() {
         do{
             try FIRAuth.auth()?.signOut()
@@ -49,21 +72,29 @@ class MenuTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return (com.count + 1)
+        return 2
     }
   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath) as! DispTableViewCell
         
 
         // Configure the cell...
-        if indexPath.row == com.count {
+        if indexPath.row == 1 {
             cell.addImage.image = UIImage(named: "add")
             cell.textLabel?.backgroundColor = UIColor(colorLiteralRed: 241.0, green: 250.0, blue: 237.0, alpha: 1.0)
         }else{
-            cell.ballImage.image = UIImage(named: "GreenBall")
-            cell.comodo.text = com[indexPath.row]
-            cell.textLabel?.backgroundColor = UIColor(colorLiteralRed: 241.0, green: 250.0, blue: 237.0, alpha: 1.0)
+            if connect == "Desconectado" {
+                cell.ballImage.image = UIImage(named: "RedBall")
+                cell.comodo.text = como
+                cell.textLabel?.backgroundColor = UIColor(colorLiteralRed: 241.0, green: 250.0, blue: 237.0, alpha: 1.0)
+            }else{
+                cell.ballImage.image = UIImage(named: "GreenBall")
+                cell.comodo.text = como
+                cell.textLabel?.backgroundColor = UIColor(colorLiteralRed: 241.0, green: 250.0, blue: 237.0, alpha: 1.0)
+            }
             
             
         }
@@ -71,7 +102,7 @@ class MenuTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == com.count {
+        if indexPath.row == 1 {
             performSegue(withIdentifier: "VaiAdd", sender: self)
         }
     }
