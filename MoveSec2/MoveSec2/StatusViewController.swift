@@ -15,6 +15,8 @@ class StatusViewController: UIViewController {
     
     @IBOutlet weak var data: UILabel!
     
+    @IBOutlet weak var descricao: UILabel!
+    
     var aux = " "
     
     
@@ -45,6 +47,7 @@ class StatusViewController: UIViewController {
                     self.navigationItem.title = (dictionary["nome"] as? String)!
                     self.invasoes.text = (dictionary["Ninvasoes"] as? String)!
                     self.data.text = (dictionary["dataUI"] as? String)!
+                    self.descricao.text = (dictionary["Descricao"] as? String)!
                     
                 }
                 

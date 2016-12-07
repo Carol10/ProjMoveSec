@@ -24,6 +24,7 @@ class AddDispViewController: UIViewController {
     var data = " "
     var email = " "
     var nome = " "
+    var descricao = " "
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,8 +64,9 @@ class AddDispViewController: UIViewController {
                     self.data = (dictionary["dataUI"] as? String)!
                     self.email = (dictionary["email"] as? String)!
                     self.nome = (dictionary["nome"] as? String)!
+                    self.descricao = (dictionary["Descricao"] as? String)!
                     
-                    let values = ["nome": self.nome, "email": self.email, "NLD" : comodo, "codD" : cod, "dataUI" : self.data, "Ninvasoes" : self.invasoes, "conexao" : self.connect]
+                    let values = ["nome": self.nome, "email": self.email, "NLD" : comodo, "codD" : cod, "dataUI" : self.data, "Ninvasoes" : self.invasoes, "conexao" : self.connect, "Descricao" : self.descricao]
                     FIRDatabase.database().reference().child("Users").child(uid!).setValue(values)
                 }
                 

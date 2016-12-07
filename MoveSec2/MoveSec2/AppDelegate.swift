@@ -20,7 +20,7 @@ import UserNotifications
         // Override point for customization after application launch.
         FIRApp.configure()
         
-        //////////Local Notification
+        //////////Local Notification 1
         let center = UNUserNotificationCenter.current()
         
         let actions = [UNNotificationAction.init(identifier: "Invasao", title: "Alerta de Invasão", options: UNNotificationActionOptions.foreground)]
@@ -37,8 +37,6 @@ import UserNotifications
             print("Notificações Sucesso!")
             
         })
-        
-    // UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
         ///////////////////////////////////
         
         
@@ -80,13 +78,6 @@ import UserNotifications
         
         print(userInfo)
     }
-//    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-//        
-//        let code = MenuTableViewController()
-//        completionHandler(.newData)
-//
-//        
-//    }
     
 }
 

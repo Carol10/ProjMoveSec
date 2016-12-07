@@ -17,6 +17,12 @@ class MenuTableViewController: UITableViewController {
     var inv = " "
     var aux = " "
     
+    var data = " "
+    var codD = " "
+    var nome = " "
+    var email = " "
+    var descricao = " "
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,15 +52,28 @@ class MenuTableViewController: UITableViewController {
         if FIRAuth.auth()?.currentUser?.uid == nil {
             perform(#selector(handleLogOut), with: nil, afterDelay: 0)
         }else{
+            
             let uid = FIRAuth.auth()?.currentUser?.uid
             
             FIRDatabase.database().reference().child("Users").child(uid!).observeSingleEvent(of: .value, with: {(snapshot) in
                 
                 if let dic = snapshot.value as? [String:Any]{
                     self.inv = (dic["Ninvasoes"] as? String)!
+                    self.nome = (dic["nome"] as? String)!
+                    self.email = (dic["email"] as? String)!
+                    self.data = (dic["dataUI"] as? String)!
+                    self.codD = (dic["codD"] as? String)!
+                    //self.connect = (dic["conexao"] as? String)!
+                    self.como = (dic["NLD"] as? String)!
+                    self.descricao = (dic["Descricao"] as? String)!
+                    
+                    let values = ["nome": self.nome, "email": self.email, "NLD" : self.como, "codD" : self.codD, "dataUI" : self.data, "Ninvasoes" : self.inv, "conexao" : "Desconectado", "Descricao" : self.descricao]
+                    
+                    FIRDatabase.database().reference().child("Users").child(uid!).setValue(values)
                 }
             
             })
+            
             
             FIRDatabase.database().reference().child("Users").child(uid!).observe(.value, with: { (snapshot) in
                 
@@ -70,10 +89,10 @@ class MenuTableViewController: UITableViewController {
                             self.localNot()
                         }
                     }
+
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
-                    
                     
                 }
             
