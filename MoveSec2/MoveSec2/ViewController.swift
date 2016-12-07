@@ -15,6 +15,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var senhaField: UITextField!
     @IBOutlet weak var entrar: UIButton!
     @IBOutlet weak var cadastrar: UIButton!
+    @IBOutlet weak var appIcone: UIImageView!
     
     var e = 0
 
@@ -28,6 +29,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
         emailField.delegate = self
         senhaField.delegate = self
+        
+        appIcone.image = UIImage(named: "TelaInicial")
         
     }
 

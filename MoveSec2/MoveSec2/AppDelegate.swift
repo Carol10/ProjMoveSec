@@ -18,8 +18,29 @@ import UserNotifications
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
         FIRApp.configure()
+        
+        //////////Local Notification
+        let center = UNUserNotificationCenter.current()
+        
+        let actions = [UNNotificationAction.init(identifier: "Invasao", title: "Alerta de Invasão", options: UNNotificationActionOptions.foreground)]
+        
+        let category = UNNotificationCategory(identifier: "Legal", actions: actions, intentIdentifiers: [], options: [])
+        
+        center.setNotificationCategories([category])
+        
+        center.requestAuthorization(options: [.alert, .sound, .badge], completionHandler: { (granted, error) in
+            
+            if(error != nil){
+                print("Local notificações erro!")
+            }
+            print("Notificações Sucesso!")
+            
+        })
+        
+    // UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
+        ///////////////////////////////////
+        
         
         let notType: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.badge, UIUserNotificationType.sound]
         let notSettings = UIUserNotificationSettings(types: notType, categories: nil)
@@ -59,6 +80,13 @@ import UserNotifications
         
         print(userInfo)
     }
+//    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+//        
+//        let code = MenuTableViewController()
+//        completionHandler(.newData)
+//
+//        
+//    }
     
 }
 

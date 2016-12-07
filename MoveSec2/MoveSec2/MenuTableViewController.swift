@@ -8,11 +8,15 @@
 
 import UIKit
 import Firebase
+import UserNotifications
 
 class MenuTableViewController: UITableViewController {
 
     var como = " "
     var connect = "Desconectado"
+    var inv = " "
+    var aux = " "
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +34,7 @@ class MenuTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         
         checkUser()
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,19 +47,56 @@ class MenuTableViewController: UITableViewController {
             perform(#selector(handleLogOut), with: nil, afterDelay: 0)
         }else{
             let uid = FIRAuth.auth()?.currentUser?.uid
+            
+            FIRDatabase.database().reference().child("Users").child(uid!).observeSingleEvent(of: .value, with: {(snapshot) in
+                
+                if let dic = snapshot.value as? [String:Any]{
+                    self.inv = (dic["Ninvasoes"] as? String)!
+                }
+            
+            })
+            
             FIRDatabase.database().reference().child("Users").child(uid!).observe(.value, with: { (snapshot) in
                 
                 if let dictionary = snapshot.value as? [String:Any]{
                     self.como = (dictionary["NLD"] as? String)!
                     self.connect = (dictionary["conexao"] as? String)!
+                    self.aux = (dictionary["Ninvasoes"] as? String)!
                     
+                    if(self.aux != self.inv){
+                        self.inv = self.aux
+                        
+                        DispatchQueue.main.async {
+                            self.localNot()
+                        }
+                    }
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
+                    
+                    
                 }
             
             })
         }
+    }
+    
+    func localNot() {
+        let content = UNMutableNotificationContent()
+        content.categoryIdentifier = "Legal"
+        content.title = "Alerta de Invasão!"
+        content.body = "Alerta de movimentação proxima ao dipositivo instalado em \(self.como)"
+        content.sound = UNNotificationSound.default()
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let request = UNNotificationRequest(identifier: "Now", content: content, trigger: trigger)
+        
+        let center = UNUserNotificationCenter.current()
+        
+        center.add(request, withCompletionHandler: {(er) in
+            print("erro not: \(er)")
+        })
+        
     }
     
     func handleLogOut() {

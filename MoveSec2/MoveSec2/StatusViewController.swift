@@ -15,6 +15,8 @@ class StatusViewController: UIViewController {
     
     @IBOutlet weak var data: UILabel!
     
+    var aux = " "
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

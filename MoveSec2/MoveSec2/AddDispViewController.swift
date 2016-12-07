@@ -69,9 +69,7 @@ class AddDispViewController: UIViewController {
                 }
                 
             })
-            
-            
-            
+
         }
         
         performSegue(withIdentifier: "VoltaMenu", sender: self)
