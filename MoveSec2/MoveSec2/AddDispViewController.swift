@@ -19,7 +19,7 @@ class AddDispViewController: UIViewController {
     
     var como = " "
     var codD = " "
-    var connect = " "
+    //var connect = "Conectado"
     var invasoes = " "
     var data = " "
     var email = " "
@@ -57,16 +57,15 @@ class AddDispViewController: UIViewController {
                 
                 if let dictionary = snapshot.value as? [String:Any]{
                     //self.como = (dictionary["NLD"] as? String)!
-                    self.connect = (dictionary["conexao"] as? String)!
+                    //self.connect = (dictionary["conexao"] as? String)!
                     //self.codD = (dictionary["codD"] as? String)!
-                    self.connect = (dictionary["conexao"] as? String)!
                     self.invasoes = (dictionary["Ninvasoes"] as? String)!
                     self.data = (dictionary["dataUI"] as? String)!
                     self.email = (dictionary["email"] as? String)!
                     self.nome = (dictionary["nome"] as? String)!
                     self.descricao = (dictionary["Descricao"] as? String)!
                     
-                    let values = ["nome": self.nome, "email": self.email, "NLD" : comodo, "codD" : cod, "dataUI" : self.data, "Ninvasoes" : self.invasoes, "conexao" : self.connect, "Descricao" : self.descricao]
+                    let values = ["nome": self.nome, "email": self.email, "NLD" : comodo, "codD" : cod, "dataUI" : self.data, "Ninvasoes" : self.invasoes, "conexao" : "Conectado", "Descricao" : self.descricao]
                     FIRDatabase.database().reference().child("Users").child(uid!).setValue(values)
                 }
                 

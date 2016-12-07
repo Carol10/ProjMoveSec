@@ -67,9 +67,9 @@ class MenuTableViewController: UITableViewController {
                     self.como = (dic["NLD"] as? String)!
                     self.descricao = (dic["Descricao"] as? String)!
                     
-                    let values = ["nome": self.nome, "email": self.email, "NLD" : self.como, "codD" : self.codD, "dataUI" : self.data, "Ninvasoes" : self.inv, "conexao" : "Desconectado", "Descricao" : self.descricao]
+                  //  let values = ["nome": self.nome, "email": self.email, "NLD" : self.como, "codD" : self.codD, "dataUI" : self.data, "Ninvasoes" : self.inv, "conexao" : "Desconectado", "Descricao" : self.descricao]
                     
-                    FIRDatabase.database().reference().child("Users").child(uid!).setValue(values)
+                   // FIRDatabase.database().reference().child("Users").child(uid!).setValue(values)
                 }
             
             })

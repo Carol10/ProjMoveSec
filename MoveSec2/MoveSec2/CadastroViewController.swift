@@ -59,7 +59,7 @@ class CadastroViewController: UIViewController, UITextFieldDelegate{
             let ref = FIRDatabase.database().reference(fromURL: "https://movesec2-83125.firebaseio.com/")
             let usersReference = ref.child("Users").child(uid)
             
-            let values = ["nome": nomec, "email": emailc, "NLD" : "Sem dispositivos.", "codD" : "0", "dataUI" : "Sem data.", "Ninvasoes" : "0", "conexao" : "Desconectado", "Descricao" : "Sem Invasor."]
+            let values = ["nome": nomec, "email": emailc, "NLD" : "Sem dispositivos.", "codD" : "0", "dataUI" : "Sem data.", "Ninvasoes" : "0", "conexao" : "Desconectado", "Descricao" : " "]
             
             usersReference.updateChildValues(values, withCompletionBlock: {
                 (err,ref) in
